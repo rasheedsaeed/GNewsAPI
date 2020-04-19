@@ -18,14 +18,16 @@ class GNews:
         self.maxdate = maxdate
 
     def search(self, q: str) -> json:
-        q = q.strip()
-        if not q:
-            raise NameError("Gnews search(): No query provided!")
+        # I need to handle the below. 
+        # If the user types "Any example" how do I handle the white space
+        # and how is it differentiate between the example and "         ".
+        # if not q:
+        #     raise NameError("Gnews search(): No query provided!")
 
         response = requests.get(
                 GNews.BASE_URL + "search?q={0}?country={1}" +
                 "mindate={2}?maxdate={3}?lang={4}?token={5}".format(
-                        0=q, 1=self.country, 
+                        0="'" + q + "'", 1=self.country, 
                         2=self.mindate, 3=self.maxdate, 
                         4=self.lang, 5=self.token
                 )
