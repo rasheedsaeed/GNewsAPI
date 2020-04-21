@@ -1,10 +1,12 @@
 import requests
 import json
 
+# Documentation: https://gnews.io/docs/v3#introduction
+
 
 class GNews:
     BASE_URL = "https://gnews.io/api/v3/"
-    COMMON_URL_PARAMS = "?lang={}?country={}?max={}?image={}?token={}?"
+    COMMON_URL_PARAMS = "&lang={}&country={}&max={}&image={}&token={}&"
     AVAILABLE_TOPICS = [
         "world",
         "nation",
@@ -19,8 +21,8 @@ class GNews:
     def __init__(
         self,
         token,
-        lang="en_UK",
-        country="UK",
+        lang="en",
+        country="uk",
         mindate="None",
         maxdate="None",
         max_results=10,
@@ -58,18 +60,19 @@ class GNews:
 
         return requests.get(
             GNews.BASE_URL
-            + "search"
-            + GNews.COMMON_URL_PARAMS
-            + "mindate={}?maxdate={}?in={}?q={}".format(
+            + "search?"
+            + "&q={}&mindate={}&maxdate={}&in={}".format(
+                '"' + query + '"',
+                mindate if mindate else self.mindate,
+                maxdate if maxdate else self.maxdate,
+                in_search if in_search else self.in_search,
+            )
+            + GNews.COMMON_URL_PARAMS.format(
                 lang if lang else self.lang,
                 country if country else self.country,
                 max_results if max_results else self.max_results,
                 image if image else self.image,
                 self.token,
-                mindate if mindate else self.mindate,
-                maxdate if maxdate else self.maxdate,
-                in_search if in_search else self.in_search,
-                '"' + query + '"',
             )
         )
 
@@ -79,7 +82,7 @@ class GNews:
 
         return requests.get(
             GNews.BASE_URL
-            + "top-news"
+            + "top-news?"
             + GNews.COMMON_URL_PARAMS.format(
                 lang if lang else self.lang,
                 country if country else self.country,
@@ -93,12 +96,14 @@ class GNews:
         self, query: str, lang=None, country=None, max_results=None, image=None
     ) -> requests.models.Response:
 
-        if query not in GNews.AVAILABLE_TOPICS:
+        if query.lower() not in GNews.AVAILABLE_TOPICS:
             raise NameError("Gnews topic(): the provided topic is not avaible!")
 
         return requests.get(
             GNews.BASE_URL
+            + "topics/"
             + query
+            + "?"
             + GNews.COMMON_URL_PARAMS.format(
                 lang if lang else self.lang,
                 country if country else self.country,
@@ -107,3 +112,18 @@ class GNews:
                 self.token,
             )
         )
+
+    def edit_parameters(self, param: str):
+        pass
+        # param = param.lower()
+
+        # if param is "token":
+        #     self.token = param[]
+
+
+a = GNews("196ca48fc8cb1ddb90e2926721fc3f72")
+result = a.search(query="Bluefield")
+
+
+print(result.url)
+print(result.json())
