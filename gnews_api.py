@@ -113,17 +113,3 @@ class GNews:
             )
         )
 
-    def edit_parameters(self, param: str):
-        pass
-        # param = param.lower()
-
-        # if param is "token":
-        #     self.token = param[]
-
-
-a = GNews("196ca48fc8cb1ddb90e2926721fc3f72")
-result = a.search(query="Bluefield")
-
-
-print(result.url)
-print(result.json())
