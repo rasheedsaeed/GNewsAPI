@@ -137,10 +137,6 @@ class GNews:
                     self.token,
                 )
             )
-<<<<<<< HEAD
-        )
-
-=======
             response.raise_for_status()
         except requests.exceptions.Timeout as error:
             raise requests.exceptions.Timeout(error)
@@ -152,4 +148,3 @@ class GNews:
             raise requests.exceptions.HTTPError(error)
 
         return response
->>>>>>> feature/gnews_api
