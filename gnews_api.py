@@ -97,7 +97,7 @@ class GNews:
     ) -> requests.models.Response:
 
         if query.lower() not in GNews.AVAILABLE_TOPICS:
-            raise NameError("Gnews topic(): the provided topic is not avaible!")
+            raise NameError("Gnews topic(): the provided topic is not available!")
 
         return requests.get(
             GNews.BASE_URL
