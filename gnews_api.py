@@ -1,5 +1,4 @@
 import requests
-import json
 
 # Documentation: https://gnews.io/docs/v3#introduction
 
