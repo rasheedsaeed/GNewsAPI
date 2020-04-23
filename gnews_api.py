@@ -1,5 +1,7 @@
-import requests
-import json
+try:
+    import requests
+except ImportError as error:
+    raise ImportError(error)
 
 # Documentation: https://gnews.io/docs/v3#introduction
 
@@ -30,9 +32,9 @@ class GNews:
         in_search="all",
     ):
 
-        token = token.strip()
-        if not token:
-            raise NameError("Gnews constructor: API (str) not defined!")
+        if not token.strip():
+            raise TypeError('Token not provided')
+
 
         self.token = token
         self.lang = lang
@@ -55,8 +57,8 @@ class GNews:
         in_search=None,
     ) -> requests.models.Response:
 
-        if not query:
-            raise NameError("Gnews search(): No query provided!")
+        if not query.strip():
+            raise TypeError("Gnews search(): No query provided!")
 
         try:
             response = requests.get(
@@ -120,7 +122,9 @@ class GNews:
         self, query: str, lang=None, country=None, max_results=None, image=None
     ) -> requests.models.Response:
 
-        if query.lower() not in GNews.AVAILABLE_TOPICS:
+        if not query.strip():
+            raise TypeError("GNews topic(): no provided")
+        elif query.lower() not in GNews.AVAILABLE_TOPICS:
             raise NameError("Gnews topic(): the provided topic is not available!")
 
         try:
