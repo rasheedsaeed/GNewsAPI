@@ -33,8 +33,7 @@ class GNews:
     ):
 
         if not token.strip():
-            raise TypeError('Token not provided')
-
+            raise TypeError("Token not provided")
 
         self.token = token
         self.lang = lang
