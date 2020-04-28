@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-import requests
-=======
 try:
     import requests
 except ImportError as error:
     raise ImportError(error)
->>>>>>> testing
 
 # Documentation: https://gnews.io/docs/v3#introduction
 
