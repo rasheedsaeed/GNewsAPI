@@ -151,3 +151,7 @@ class GNews:
             raise requests.exceptions.HTTPError(error)
 
         return response
+
+token = "196ca48fc8cb1ddb90e2926721fc3f72"
+a = GNews(token)
+print(a.search("FTSE100").json())
