@@ -1,3 +1,3 @@
 # GNewsAPI
 
-A Python script that uses the full capabilities of https://gnews.io (V3).
+A Python module that uses the full capabilities of https://gnews.io (V3).
